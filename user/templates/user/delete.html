@@ -1,0 +1,11 @@
+<h1>Do you want delete this user</h1>
+<form action="" method="post">
+    <div>Username: {{ user.username }}</div>
+    <div>Email: {{ user.email }}</div>
+    <div>Firstname: {{ user.first_name }}</div>
+    <div>Lastname: {{ user.last_name }}</div>
+    <br>
+    {% csrf_token %}
+    <button type="submit">Delete</button>
+</form>
+<button><a href="{% url 'user_v2:UserList' %}">Cancel</a></button>

@@ -1,0 +1,21 @@
+{% if error %}
+    <div>{{ error }}</div>
+{% else %}
+    <form action="{% url "user_v2:UserCreate" %}" method="post">
+        <h1>Create User</h1>
+        {% csrf_token %}
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username"></input>
+        <br>
+        <label for="email">Email:</label>
+        <input type="text" id="email" name="email"></input>
+        <br>
+        <label for="firstname">Firstname:</label>
+        <input type="text" id="firstname" name="first_name"></input>
+        <br>
+        <label for="lastname">Lastname:</label>
+        <input type="text" id="lastname" name="last_name"></input>
+        <br>
+        <button type="submit">Create User</button>
+    </form>
+{% endif %}

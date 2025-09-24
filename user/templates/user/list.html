@@ -1,0 +1,8 @@
+<ul>
+    <button><a href="{% url 'user_v2:UserCreate' %}">Create</a></button>
+    {% for user in users_list %}
+        <li>{{ user.username }} - {{ user.email }}</li>
+        <button><a href="{% url 'user_v2:UserDetail' user.id %}">View Details</a></button>
+        <button><a href="{% url 'user_v2:UserDelete' user.id %}">Delete</a></button>
+    {% endfor %}
+</ul>

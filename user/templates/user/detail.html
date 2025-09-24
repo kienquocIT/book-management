@@ -1,0 +1,37 @@
+{% if user %}
+    <form method="post">
+        <h1>Update User</h1>
+        {% csrf_token %}
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username"></input>
+        <br>
+        <label for="email">Email:</label>
+        <input type="text" id="email" name="email"></input>
+        <br>
+        <label for="firstname">Firstname:</label>
+        <input type="text" id="firstname" name="first_name"></input>
+        <br>
+        <label for="lastname">Lastname:</label>
+        <input type="text" id="lastname" name="last_name"></input>
+        <br>
+        <button type="submit">Update User</button>
+        <button><a href="{% url 'UserDelete' user.id %}">Delete</a></button>
+        <button><a href="{% url 'UserList'%}">Back to list</a></button>     
+    </form>
+
+    <Script>
+        window.onload = function() {
+            document.getElementById("username").setAttribute("value", "{{ user.username }}");
+            document.getElementById("email").setAttribute("value", "{{ user.email }}");
+            document.getElementById("firstname").setAttribute("value", "{{ user.first_name }}");
+            document.getElementById("lastname").setAttribute("value", "{{ user.last_name }}");
+        }
+    </Script>
+    
+{% else %}
+    {% if error %}
+        <div>{{ error }}</div>
+    {% else %}
+        <div>User not found</div>
+    {% endif %}
+{% endif %}
