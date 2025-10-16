@@ -1,11 +1,12 @@
-from rest_framework import serializers 
-from ..models import User
+from rest_framework import serializers
+from rest_framework.serializers import FileField, Serializer
+from ..models import User, UploadedFile
 from django.contrib.auth.hashers import check_password
 
 class UserCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['id', 'username', 'email', 'first_name', 'last_name', 'password']
+        fields = ['id', 'username', 'email', 'first_name', 'last_name', 'password', 'is_staff']
         extra_kwargs = {'password': {'write_only': True}}
 
     def create(self, validated_data):
@@ -25,7 +26,7 @@ class UserListSerializer(serializers.ModelSerializer):
 class UserDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['id', 'username', 'email', 'first_name', 'last_name', 'password']
+        fields = ['id', 'username', 'email', 'first_name', 'last_name', 'password', 'avatar']
         extra_kwargs = {'password': {'write_only': True}}
 
 class UserUpdateSerializer(serializers.ModelSerializer):
@@ -44,7 +45,7 @@ class UserUpdateSerializer(serializers.ModelSerializer):
 class UserRegisterSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['id', 'username', 'email', 'first_name', 'last_name', 'password']
+        fields = ['id', 'username', 'email', 'first_name', 'last_name', 'password', ]
         extra_kwargs = {'password': {'write_only': True}}
 
     def create(self, validated_data):
@@ -58,6 +59,17 @@ class UserRegisterSerializer(serializers.ModelSerializer):
 class UserLoginSerializer(serializers.Serializer):
     username = serializers.CharField()
     password = serializers.CharField()
+
+
+class UploadedFileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UploadedFile
+        fields = '__all__'
+
+class UploadAvatarSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['id', 'avatar']
 
 
 
